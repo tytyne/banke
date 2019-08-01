@@ -9,8 +9,8 @@ class TransactionController {
         const  account = await Account.findBy('id',params.id)
         if(!account) return response.status(400).send('the id of account does not exist')
         let needs = request.only(['transactionName','accountNumber','amount','accountName','transactionDate'])
-        if(account.accountNumber!== needs.accountNumber) return response.status(400).send('the account do not exist')
-
+        if(account.accountNumber!== needs.accountNumber) return response.status(400).send('the account  does not exist')
+        if(account.accountName!==needs.accountName) return response.status(400).send('the account name is incorrect')
         const transaction = new Transaction()
         transaction.transactionName= needs.transactionName
         transaction.accountNumber= needs.accountNumber

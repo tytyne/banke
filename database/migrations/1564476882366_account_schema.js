@@ -15,6 +15,7 @@ class AccountSchema extends Schema {
       table.string('accountName', 80).notNullable()
       table.string('NID', 80).notNullable() 
       table.enu('status', ['draft', 'dormart','active']).notNullable().defaultTo('draft')
+      table.enu('type', ['current', 'saving']).notNullable()
       table.integer('amount', 80).notNullable().defaultTo(0)
       table.string('accountNumber', 80).notNullable()
       table.timestamps()

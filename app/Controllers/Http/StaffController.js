@@ -53,7 +53,6 @@ async activate({response,request,params}){
 async deactivate({response,request,params}){
     const account = await Account.findBy('id',params.id)
     if(account) return response.status(400).send('the account is not registered')
-    account.status='dormant'
     await account.save()
     response.json({message:'account deactivate'})
 }

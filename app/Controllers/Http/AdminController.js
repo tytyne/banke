@@ -38,13 +38,13 @@ class AdminController {
         const needs = request.only(['username', 'email', 'password'])
         const users = await User.findBy('email', needs.email)
         if (users) return response.status(400).send({ message: { error: 'User already registered' } })
-        const user = await User
+        const user = new User()
         user.username=needs.username
         user.email=needs.email
         user.password = needs.password
-        user.isStaff ='true'
+        user.isStaff =true
         await user.save()
-        return response.json(account)
+        return response.json(user)
   
     
     } 
@@ -53,13 +53,13 @@ class AdminController {
         const needs = request.only(['username', 'email', 'password'])
         const users = await User.findBy('email', needs.email)
         if (users) return response.status(400).send({ message: { error: 'User already registered' } })
-        const user = await User
-        user.username=needs.username
+        const user = new User()
+        user.username = needs.username
         user.email=needs.email
         user.password = needs.password
-        user.isAdmin ='true'
+        user.isAdmin =true
         await user.save()
-        return response.json(account)
+        return response.json(user)
   
     
     } 
