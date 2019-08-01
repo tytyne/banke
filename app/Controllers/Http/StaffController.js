@@ -4,12 +4,12 @@ const Transaction = use('App/Models/Transaction')
 const User = use('App/Models/User')
 class StaffController {
 
-async credit({response,request,params}){
+async credit({request,response,params,auth,admin}){
     const account=await Account.findBy('accountNumber',params.accountNumber)
     if(!account) return response.status(400).send('Invalid account')
     const transaction = await Transaction.findBy('id',params.id)
     if(!transaction) return response.status(400).send('Invalid transaction')
-    if(transaction.transactionName == 'deposit') return response.status(200).send('you are not allowed this transaction');
+    if(transaction.transactionName !== 'deposit') return response.status(200).send('you are not allowed this transaction');
     account.amount=parseInt(account.amount) + parseInt(transaction.amount);
     account.status='active';
     await account.save();
@@ -19,7 +19,7 @@ async credit({response,request,params}){
     });
 
 }
-async debit({response,request,params}){
+async debit({request,response,params,auth,admin}){
     const account=await Account.findBy('accountNumber',params.accountNumber)
     if(!account) return response.status(400).send('Invalid account')
     const transaction = await Transaction.findBy('id',params.id)
@@ -34,30 +34,31 @@ async debit({response,request,params}){
 
 }
 
-async users({response,request}){
+async users({request,response}){
     const account = await Account.all()
     response.json(account)
 }
-async user({response,request,params}){
+async user({request,response,params}){
   const account = await Account.findBy('id',params.id)
   if(!user) return response.status(400).send('user does not exist')
   response.json(account)
 }
-async activate({response,request,params}){
+async activate({request,response,params}){
     const account = await Account.findBy('id',params.id)
-    if(account) return response.status(400).send('the account is not registered')
+    if(!account) return response.status(400).send('the account is not registered')
     account.status='active'
     await account.save()
     response.json({message:'account activate'})
 }
-async deactivate({response,request,params}){
+async deactivate({request,response,params}){
     const account = await Account.findBy('id',params.id)
-    if(account) return response.status(400).send('the account is not registered')
+    if(!account) return response.status(400).send('the account is not registered')
+    account.status='deactivate'
     await account.save()
     response.json({message:'account deactivate'})
 }
 
-async delete({response,request,params}){
+async delete({request,response,params}){
    const account = await Account.findBy('id',params.id)
    if(!account) return response.status(400).send('the account is not registered')
    await account.delete()
