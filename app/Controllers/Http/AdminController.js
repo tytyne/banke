@@ -13,7 +13,7 @@ class AdminController {
       if(!user) return response.status(400).send('user does not exist')
       response.json(account)
     }
-    async activate({response,request,params}){
+    async activate({response,request,params,auth}){
         const account = await Account.findBy('id',params.id)
         if(!account) return response.status(400).send('the account is not registered')
         account.status='active'

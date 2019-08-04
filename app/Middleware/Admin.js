@@ -9,10 +9,11 @@ class Admin {
    * @param {Request} ctx.request
    * @param {Function} next
    */
-  async handle ({ request,response }, next) {
+  async handle ({auth, request,response }, next) {
     // call next to advance the request
     // return response.send({user: request.user});
-    if(!request.user)return response.status(403).send('Access denied');
+    // console.log(await auth.getUser());
+    if(! (await auth.getUser()).isAdmin) return response.status(403).send('Access denied');
 
     await next()
   }

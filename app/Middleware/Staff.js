@@ -11,7 +11,7 @@ class Staff {
    */
   async handle ({ request,response }, next) {
     // call next to advance the request
-    if(!request.user.isStaff)return response.status(403).send('Access denied');
+    if(! (await auth.getUser()).isStaff)return response.status(403).send('Access denied');
     await next()
   }
 }

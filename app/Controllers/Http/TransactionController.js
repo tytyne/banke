@@ -1,10 +1,21 @@
 'use strict'
-
+const { validate } = use('Validator');
 const Account = use('App/Models/Account')
 const Transaction = use('App/Models/Transaction')
 class TransactionController {
 
     async transaction({request,response,params}){
+        const rules = {
+            accountNUmber: 'required',
+            amount: 'required',
+            accountName:'required',
+            transactionDate:'required',
+            // password: 'required|min:4|in:abcde,efghij',
+            transactionName:'required|in:withdraw,deposit',
+          }
+          const validation = await validate(request.all(), rules);
+  
+          if (validation.fails()) return response.json(validation)
 
         const  account = await Account.findBy('id',params.id)
         if(!account) return response.status(400).send('the id of account does not exist')
