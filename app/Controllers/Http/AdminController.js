@@ -1,5 +1,5 @@
 'use strict'
-const Account = use('App/Models/Account');
+const Account = use('App/Models/Account')
 const Transaction = use('App/Models/Transaction')
 const User = use('App/Models/User')
 class AdminController {

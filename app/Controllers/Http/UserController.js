@@ -1,5 +1,5 @@
 'use strict'
-const { validate } = use('Validator');
+const { validate } = use('Validator')
 const User = use('App/Models/User')
 
 
