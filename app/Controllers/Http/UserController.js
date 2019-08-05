@@ -17,8 +17,7 @@ class UserController {
 
         if (validation.fails()) return response.json(validation)
         const needs = request.only(['username', 'email', 'password'])
-        validate(needs,rules,messages)
-        const users = await User.findBy('email', needs.email)
+               const users = await User.findBy('email', needs.email)
 
         if (users) return response.status(400).send({ message: { error: 'User already registered' } })
       
