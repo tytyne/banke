@@ -6,7 +6,7 @@ class AccountController {
     async account({response,request,params,auth}){
         const rules = {
             NID: 'required',
-            type: 'required',
+            type: 'required'
           }
         const validation = await validate(request.all(), rules);
         if (validation.fails()) return response.json(validation)
