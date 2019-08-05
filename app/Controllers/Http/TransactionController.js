@@ -1,5 +1,5 @@
 'use strict'
-const { validate } = use('Validator');
+const { validate } = use('Validator')
 const Account = use('App/Models/Account')
 const Transaction = use('App/Models/Transaction')
 class TransactionController {
