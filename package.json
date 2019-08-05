@@ -8,9 +8,7 @@
     "start": "node server.js",
     "test": "node ace test"
   },
-  "engines": {
-    "node": "12.6.0"
-},
+
 
   "keywords": [
     "adonisjs",
@@ -40,7 +38,9 @@
   "devDependencies": {},
   "autoload": {
     "App": "./app"
+  },
+  "engines": {
+    "node": "12.6.0"
   }
-
 
 }
