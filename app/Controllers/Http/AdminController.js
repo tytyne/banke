@@ -5,13 +5,13 @@ const User = use('App/Models/User')
 class AdminController {
 
     async users({response,request}){
-        const account = await Account.all()
-        response.json(account)
+        const user = await User.all()
+        response.json(user)
     }
     async user({response,request,params}){
-      const account = await Account.findBy('id',params.id)
+      const user = await User.findBy('id',params.id)
       if(!user) return response.status(400).send('user does not exist')
-      response.json(account)
+      response.json(user)
     }
     async activate({response,request,params,auth}){
         const account = await Account.findBy('id',params.id)
